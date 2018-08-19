@@ -1,0 +1,27 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 入手折腾 Samsung Chromebook Pro · freeblog</title><meta name="description" content="入手折腾 Samsung Chromebook Pro - Zhang Lei"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="freeblog"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">入手折腾 Samsung Chromebook Pro</h1><div class="post-info">Aug 19, 2018</div><div class="post-content"><p>前段时间被 Chromebook 吸引，入手了一款 Samsung Chromebook Pro,具体配置可自行 google，下面对折腾记录一下。</p>
+<a id="more"></a>
+<h2 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h2><p>Chromebook 开机登录需要 google 帐号，自己通过在树莓派上搭建的可自由上网的路由器搞定，登录入系统后可通过 play store 下载 shadowsocks，挂代理后就不需要一直连接树莓派了(由于目前只搭建了全局，还没做优化)，连接上任一 wifi 即可。</p>
+<h2 id="进入开发者模式"><a href="#进入开发者模式" class="headerlink" title="进入开发者模式"></a>进入开发者模式</h2><p>按住 Esc 键和刷新(F3)按键，然后按住 Power 按钮，调用 Recovery 模式。<br>出现 Recovery 屏幕后，按 Ctrl + D。该操作没有提示，因此只需完成即可。此后，系统会提示确认并重新启动以进入开发者模式。</p>
+<p><strong>注：进入开发者模式会清空用户数据，注意备份</strong>。要跳过 OS 加载屏幕，请等待30秒，或者按 Ctrl + D，Chromebook 将继续启动。</p>
+<p>进入开发者模式后，就可以自己下载 APK 文件进行应用安装了。</p>
+<h2 id="利用-crouton-安装-Ubuntu"><a href="#利用-crouton-安装-Ubuntu" class="headerlink" title="利用 crouton 安装 Ubuntu"></a>利用 crouton 安装 Ubuntu</h2><p>进入开发者模式后，还可以基于 crouton 安装 Ubuntu，操作如下：</p>
+<ol>
+<li>从 <a href="https://goo.gl/fd3zc" target="_blank" rel="noopener">https://goo.gl/fd3zc</a> 下载最新的 crouton 版本，放到 ~/Download 目录下</li>
+<li>打开 Chrome，键入 Ctrl + Alt + T，进入 shell 界面，输入 shell 并回车</li>
+<li>执行： sudo sh ~/Downloads/crouton -t xfce ，也可以安装其他桌面(该过程需要连接树莓派的网络，否则会出现某个源下载不了导致失败)</li>
+<li>安装完成之后即可进入桌面：sudo enter-chroot 进入终端，sudo startxfce4 进入图形界面</li>
+<li>在 Chrome os 和 Ubuntu 之间进行切换：从 C 到 U，shift + ctrl + alt + 前进键，从 U 到<br>C，shift + ctrl + alt + 后退键</li>
+<li>之后就可以畅快的玩耍 Chrome os 和 Ubuntu了。</li>
+</ol>
+<h2 id="xiwi-窗口化"><a href="#xiwi-窗口化" class="headerlink" title="xiwi 窗口化"></a>xiwi 窗口化</h2><p>在两个系统之间切换很麻烦，所以可以使用 xiwi 来实现窗口化：</p>
+<ol>
+<li>给 Chrome 安装 crouton 扩展：<a href="https://goo.gl/OVQOEt" target="_blank" rel="noopener">https://goo.gl/OVQOEt</a></li>
+<li>安装 xiwi：sudo sh ~/Downloads/crouton -u -t xiwi</li>
+</ol>
+<h2 id="安装-vscode"><a href="#安装-vscode" class="headerlink" title="安装 vscode"></a>安装 vscode</h2><p>在 Chrome os 中下载 vscode 的 ubuntu 版本，默认放在 Downloads 目录下，在 Ubuntu 终端界面进行安装：</p>
+<ol>
+<li>sudo dpkg -i code*.deb  //下载的 vscode 的对应版本</li>
+<li>sudo apt-get install -f   //安装依赖</li>
+</ol>
+<p>安装成功之后，可以通过 xiwi -T code -f . 使 vscode 窗口化。</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/08/19/你好成都/" class="prev">PREV</a><a href="/2018/08/19/raspberrypi安装/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2018 <a href="http://yoursite.com">Zhang Lei</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>
