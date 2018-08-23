@@ -69,7 +69,9 @@ deploy:
 
 我在 [godaddy](https://sg.godaddy.com/) 上购买了为期三年的域名，域名解析用的 [DNSPod](https://www.dnspod.cn/)，进入 DNSPod 中添加自己的域名及对应的服务器，同时要去 godaddy 中将你的 Nameservers 修改成 DNSPod 自家的，等几分钟就好,我的设置：
 ![](https://ws1.sinaimg.cn/large/006tNbRwly1fujzpa9r9tj319a0fogo8.jpg)
-设置完成后,ping 一下绑定的域名，ip 跟 zhanglei12345.github.io 的 ip 相同，绑定成功。查看 github 上该仓库设置中的 GitHub Pages 参数，可以把域名删掉保存然后再重新填写一遍保存，要不然开启 HTTPS 可能会报错。
+设置完成后,ping 一下绑定的域名，ip 跟 zhanglei12345.github.io 的 ip 相同，绑定成功。
+在 zhanglei12345.github.io 目录下，新建一文件 CNAME，写上自己的域名，比如我的就是 haoleio.com，重新构建部署博客。
+查看 github 上该仓库设置中的 GitHub Pages 参数，可以把域名删掉保存然后再重新填写一遍保存，要不然开启 HTTPS 可能会报错。
 ![](https://ws2.sinaimg.cn/large/006tNbRwly1fuk063xkikj314u0bygnl.jpg)
 
 ### 博客源文件管理
