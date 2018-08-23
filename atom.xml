@@ -81,9 +81,9 @@
       <category term="VPS" scheme="http://yoursite.com/categories/VPS/"/>
     
     
-      <category term="VPS" scheme="http://yoursite.com/tags/VPS/"/>
-    
       <category term="Telegram" scheme="http://yoursite.com/tags/Telegram/"/>
+    
+      <category term="VPS" scheme="http://yoursite.com/tags/VPS/"/>
     
   </entry>
   
