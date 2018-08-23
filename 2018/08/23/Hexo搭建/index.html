@@ -1,0 +1,30 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 入门 Hexo 博客搭建 · Lei's blog</title><meta name="description" content="入门 Hexo 博客搭建 - Zhang Lei"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="Lei's blog"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/leizhang233" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/zhanglei12345" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">入门 Hexo 博客搭建</h1><div class="post-info">Aug 23, 2018</div><div class="post-content"><p>由于个人博客之前一直是搭在 VPS 上的，可看我的另一篇博客()，同时自己的.me域名到期续费太贵就没继续用了，索性将博客全部迁移至 Github Pages，绑定了新的域名。1 年时间也没水几篇博客，逃！下面记录下自己搭建的流程吧，总的来的挺简单的。</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>参照 <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo 官网</a>进行安装:<br><code>npm install -g hexo-cli</code></p>
+<a id="more"></a>
+<h3 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo init username.github.io</span><br><span class="line">cd username.github.io</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+<p>主题自己使用的 <a href="https://github.com/pinggod/hexo-theme-apollo.git" target="_blank" rel="noopener">apollo</a><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-renderer-jade hexo-generator-feed hexo-generator-sitemap hexo-browsersync hexo-generator-archive</span><br><span class="line">git clone https://github.com/pinggod/hexo-theme-apollo.git themes/apollo</span><br></pre></td></tr></table></figure></p>
+<p>Hexo 3.0 把服务器独立成了个别模块，您必须先安装 hexo-server 才能使用，后续 git 方式部署需要用到。<br><code>npm install hexo-deployer-git --save</code></p>
+<h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><p>详细配置及指令请参考<a href="https://hexo.io/zh-cn/docs/commands" target="_blank" rel="noopener">官网</a>。</p>
+<p>常用指令：</p>
+<ol>
+<li>新建一篇文章<br><code>hexo new &lt;title&gt;</code><blockquote>
+<p>等同于在 <strong>source/_posts/</strong> 下新建一个.md文件</p>
+</blockquote>
+</li>
+<li>清除缓存文件(db.json)和已生成的静态文件(public)<br><code>hexo clean</code></li>
+<li>生成静态文件<br><code>hexo g</code></li>
+<li>启动服务器,可先在本地预览。默认情况下，访问网址为：<a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a><br><code>hexo s</code></li>
+<li>部署网站<br><code>hexo d</code></li>
+</ol>
+<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>部署之前必须在 github 中创建一个 username.github.io 的仓库。然后修改 _config.yml 配置文件，正确配置 deploy 参数，比如我的：<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repo:</span> <span class="attr">https://github.com/zhanglei12345/zhanglei12345.github.io.git</span></span><br><span class="line"><span class="attr">  branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure></p>
+<p>接下来可以根据主题需要，修改主题自身的配置。</p>
+<h3 id="绑定域名"><a href="#绑定域名" class="headerlink" title="绑定域名"></a>绑定域名</h3><p>我在 <a href="https://sg.godaddy.com/" target="_blank" rel="noopener">godaddy</a> 上购买了为期三年的域名，域名解析用的 <a href="https://www.dnspod.cn/" target="_blank" rel="noopener">DNSPod</a>，进入 DNSPod 中添加自己的域名及对应的服务器，同时要去 godaddy 中将你的 Nameservers 修改成 DNSPod 自家的，等几分钟就好,我的设置：<br><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fujzpa9r9tj319a0fogo8.jpg" alt=""><br>设置完成后,ping 一下绑定的域名，ip 跟 zhanglei12345.github.io 的 ip 相同，绑定成功。查看 github 上该仓库设置中的 GitHub Pages 参数，可以把域名删掉保存然后再重新填写一遍保存，要不然开启 HTTPS 可能会报错。<br><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fuk063xkikj314u0bygnl.jpg" alt=""></p>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/08/19/入手折腾SamsungChromebookPro/" class="next">NEXT</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'https-zhanglei12345-github-io';
+var disqus_identifier = '2018/08/23/Hexo搭建/';
+var disqus_title = '入门 Hexo 博客搭建';
+var disqus_url = 'http://yoursite.com/2018/08/23/Hexo搭建/';
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><script id="dsq-count-scr" src="//https-zhanglei12345-github-io.disqus.com/count.js" async></script><div class="copyright"><p>© 2015 - 2018 <a href="http://yoursite.com">Zhang Lei</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>
