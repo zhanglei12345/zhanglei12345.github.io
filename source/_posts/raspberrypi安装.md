@@ -1,6 +1,6 @@
 ---
 title: raspberrypi 安装
-date: 2018-08-19 21:44:36
+date: 2018-08-12 21:44:36
 categories: 
 - 树莓派
 tags:

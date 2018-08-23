@@ -1,13 +1,11 @@
 ---
 title: 利用 raspberrypi 搭建下载机
-date: 2018-08-19 21:44:36
+date: 2018-08-13 21:44:36
 categories: 
 - 树莓派
 tags:
 ---
 此篇文章介绍利用 raspberrypi 搭建下载机。
-
-<!--more-->
 
 ## aria2
 [aria2](https://aria2.github.io/manual/en/html/aria2c.html?highlight=session#) is a utility for downloading files.
@@ -16,6 +14,8 @@ tags:
 `sudo apt-get install aria2`
 
 aria2 运行的时候需要两个文件，并且需要我们手动配置，一个是配置文件 **aria2.conf**，保存配置，另一个是 **aria2.session**，要不每次 aria2 关闭的时候，之前下载的进度都没了。
+
+<!--more-->
 
 生成 token (外网连接加上验证)：
 [PyJWT](https://pyjwt.readthedocs.io/en/latest/)
