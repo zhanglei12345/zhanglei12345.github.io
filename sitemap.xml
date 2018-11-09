@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2018/08/10/%E5%9C%A8Ubuntu16%E4%B8%8A%E6%90%AD%E5%BB%BAshadowsocks/</loc>
+    
+    <lastmod>2018-11-09T02:13:49.325Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2018/08/23/Hexo%E6%90%AD%E5%BB%BA/</loc>
     
     <lastmod>2018-08-23T15:52:12.859Z</lastmod>
@@ -68,13 +75,6 @@
     <loc>http://yoursite.com/2018/08/12/raspberrypi%E5%AE%89%E8%A3%85/</loc>
     
     <lastmod>2018-08-23T12:54:59.883Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2018/08/10/%E5%9C%A8Ubuntu16%E4%B8%8A%E6%90%AD%E5%BB%BAshadowsocks/</loc>
-    
-    <lastmod>2018-08-23T12:54:37.106Z</lastmod>
     
   </url>
   
