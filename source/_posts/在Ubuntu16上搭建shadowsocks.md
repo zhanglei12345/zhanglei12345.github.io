@@ -87,6 +87,52 @@ sysctl -p
 lsmod | grep bbr  #如果看到 tcp_bbr 则表示开启成功
 ```
 
+## shadowsocksR
+
+获取源代码：
+```bash
+git clone -b manyuser https://github.com/shadowsocksr-backup/shadowsocksr.git 
+cd shadowsocksr
+bash initcfg.sh
+```
+
+修改 shadowsocksr 目录下的 user-config.json 配置文件:
+```
+"server_port":prot,        //端口
+"password":"password",     //密码
+"protocol":"auth_sha1_v4", //协议插件
+"obfs":"http_simple",      //混淆插件
+"method":"aes-256-cfb",    //加密方式
+```
+
+配置 Systemd 管理 shadowsocksR:
+`vi /etc/systemd/system/shadowsocksr-server.service`
+注意修改shadowsocksr的目录
+```
+[Unit]
+Description=ShadowsocksR server
+After=network.target
+Wants=network.target
+
+[Service]
+Type=forking
+PIDFile=/var/run/shadowsocksr.pid
+ExecStart=/usr/bin/python /root/git-clone-repository/shadowsocksr/shadowsocks/server.py --pid-file /var/run/shadowsocksr.pid -c /root/git-clone-repository/shadowsocksr/user-config.json -d start
+ExecStop=/usr/bin/python /root/git-clone-repository/shadowsocksr/shadowsocks/server.py --pid-file /var/run/shadowsocksr.pid -c /root/git-clone-repository/shadowsocksr/user-config.json -d stop
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+
+启动 ssr：
+`systemctl start shadowsocksr-server`
+
+设置开机启动 ssr：
+`systemctl enable shadowsocksr-server`
+
 ## ShadowsocksX-NG
 
 在[ShadowsocksX-NG](https://github.com/shadowsocks/ShadowsocksX-NG)的github上进行下载。
