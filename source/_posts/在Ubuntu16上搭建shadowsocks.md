@@ -44,18 +44,18 @@ server为vps的ip
 4. 配置 Systemd 管理 Shadowsocks:
 ` vi /etc/systemd/system/shadowsocks-server.service` 
 
-    ```bash
-    [Unit]
-    Description=Shadowsocks Server
-    After=network.target
-    
-    [Service]
-    ExecStart=/usr/local/bin/ssserver -c /etc/shadowsocks/config.json
-    Restart=on-abort
-    
-    [Install]
-    WantedBy=multi-user.target		
-    ``` 
+```bash
+[Unit]
+Description=Shadowsocks Server
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/ssserver -c /etc/shadowsocks/config.json
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target		
+``` 
 
 5. 启动 ss：
 `systemctl start shadowsocks-server`
@@ -99,16 +99,16 @@ lsmod | grep bbr  #如果看到 tcp_bbaptr 则表示开启成功
 [Docker 官方安装教程](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
 
 2. 编写 Dockerfile:  
-    ```bash
-    FROM ubuntu:18.04
-    
-    RUN apt update && \
-        apt install -y shadowsocks-libev && \
-        apt autoremove
-    
-    ENTRYPOINT ["/usr/bin/ss-server"]
-    ```
-    
+```bash
+FROM ubuntu:18.04
+
+RUN apt update && \
+	apt install -y shadowsocks-libev && \
+	apt autoremove
+
+ENTRYPOINT ["/usr/bin/ss-server"]
+```
+
 3. 在 Dockerfile 文件路径下，docker build:
 `sudo docker build -t ssdocker:v1 .`
 
@@ -144,25 +144,25 @@ bash initcfg.sh
 3. 配置 Systemd 管理 shadowsocksR:
 `vi /etc/systemd/system/shadowsocksr-server.service`
 
-    注意修改shadowsocksr的目录
-    ```bash
-    [Unit]
-    Description=ShadowsocksR server
-    After=network.target
-    Wants=network.target
-    
-    [Service]
-    Type=forking
-    PIDFile=/var/run/shadowsocksr.pid
-    ExecStart=/usr/bin/python /root/git-clone-repository/shadowsocksr/shadowsocks/server.py --pid-file /var/run/shadowsocksr.pid -c /root/git-clone-repository/shadowsocksr/user-config.json -d start
-    ExecStop=/usr/bin/python /root/git-clone-repository/shadowsocksr/shadowsocks/server.py --pid-file /var/run/shadowsocksr.pid -c /root/git-clone-repository/shadowsocksr/user-config.json -d stop
-    ExecReload=/bin/kill -HUP $MAINPID
-    KillMode=process
-    Restart=always
-    
-    [Install]
-    WantedBy=multi-user.target
-    ```
+注意修改shadowsocksr的目录
+```bash
+[Unit]
+Description=ShadowsocksR server
+After=network.target
+Wants=network.target
+
+[Service]
+Type=forking
+PIDFile=/var/run/shadowsocksr.pid
+ExecStart=/usr/bin/python /root/git-clone-repository/shadowsocksr/shadowsocks/server.py --pid-file /var/run/shadowsocksr.pid -c /root/git-clone-repository/shadowsocksr/user-config.json -d start
+ExecStop=/usr/bin/python /root/git-clone-repository/shadowsocksr/shadowsocks/server.py --pid-file /var/run/shadowsocksr.pid -c /root/git-clone-repository/shadowsocksr/user-config.json -d stop
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
 
 4. 启动 ssr：
 `systemctl start shadowsocksr-server`
@@ -181,25 +181,25 @@ bash initcfg.sh
 `git clone -b manyuser https://github.com/shadowsocksr-backup/shadowsocksr.git`
 
 3. 初始化配置：
-    ```bash
-    cd shadowsocksr
-    bash initcfg.sh
-    ```
+```bash
+cd shadowsocksr
+bash initcfg.sh
+```
     
 4. 编写 Dockerfile:  
-    ```bash
-    FROM ubuntu:18.04
+```bash
+FROM ubuntu:18.04
 
-    RUN apt update && \
-        apt install -y python && \
-        apt autoremove
-            
-    WORKDIR /ssdir
+RUN apt update && \
+	apt install -y python && \
+	apt autoremove
+		
+WORKDIR /ssdir
 
-    COPY . .
+COPY . .
 
-    ENTRYPOINT ["python","/ssdir/shadowsocksr/shadowsocks/server.py"]
-    ```
+ENTRYPOINT ["python","/ssdir/shadowsocksr/shadowsocks/server.py"]
+```
     
 5. 在 Dockerfile 文件路径下，docker build:
 `sudo docker build -t ssrdocker:v1 .`
