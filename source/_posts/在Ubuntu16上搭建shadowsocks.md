@@ -41,10 +41,8 @@ server为vps的ip
 3. 测试 ss 是否可用：
 `ssserver -c /etc/shadowsocks/config.json`
 
-4. 配置 Systemd 管理 Shadowsocks:
-` vi /etc/systemd/system/shadowsocks-server.service` 
-
-```bash
+4. 配置 Systemd 管理 Shadowsocks,`vi /etc/systemd/system/shadowsocks-server.service` :
+```conf
 [Unit]
 Description=Shadowsocks Server
 After=network.target
@@ -54,8 +52,8 @@ ExecStart=/usr/local/bin/ssserver -c /etc/shadowsocks/config.json
 Restart=on-abort
 
 [Install]
-WantedBy=multi-user.target		
-``` 
+WantedBy=multi-user.target
+```
 
 5. 启动 ss：
 `systemctl start shadowsocks-server`
@@ -99,7 +97,7 @@ lsmod | grep bbr  #如果看到 tcp_bbaptr 则表示开启成功
 [Docker 官方安装教程](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
 
 2. 编写 Dockerfile:  
-```bash
+```dockerfile
 FROM ubuntu:18.04
 
 RUN apt update && \
@@ -133,19 +131,16 @@ bash initcfg.sh
 ```
 
 2. 修改 shadowsocksr 目录下的 user-config.json 配置文件:
-```
-"server_port":prot,         //端口
+```conf
+"server_port":port,         //端口
 "password":"password",     //密码
 "protocol":"auth_sha1_v4",       //协议插件
 "obfs":"http_simple",      //混淆插件
 "method":"aes-256-cfb",    //加密方式
 ```
 
-3. 配置 Systemd 管理 shadowsocksR:
-`vi /etc/systemd/system/shadowsocksr-server.service`
-
-注意修改shadowsocksr的目录
-```bash
+3. 配置 Systemd 管理 shadowsocksR,`vi /etc/systemd/system/shadowsocksr-server.service`,注意修改shadowsocksr的目录:
+```conf
 [Unit]
 Description=ShadowsocksR server
 After=network.target
@@ -187,7 +182,7 @@ bash initcfg.sh
 ```
     
 4. 编写 Dockerfile:  
-```bash
+```dockerfile
 FROM ubuntu:18.04
 
 RUN apt update && \
