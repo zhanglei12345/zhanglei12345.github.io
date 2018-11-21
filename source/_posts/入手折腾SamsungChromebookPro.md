@@ -13,8 +13,6 @@ tags:
 
 Chromebook 开机登录需要 google 帐号，自己通过在树莓派上搭建的可自由上网的路由器搞定，登录入系统后可通过 play store 下载 shadowsocks，挂代理后就不需要一直连接树莓派了(由于目前只搭建了全局，还没做优化)，连接上任一 wifi 即可。
 
-<!--more-->
-
 进入开发者模式
 -------
 
@@ -37,6 +35,8 @@ Chromebook 开机登录需要 google 帐号，自己通过在树莓派上搭建�
  5. 在 Chrome os 和 Ubuntu 之间进行切换：从 C 到 U，shift + ctrl + alt + 前进键，从 U 到
     C，shift + ctrl + alt + 后退键
  6. 之后就可以畅快的玩耍 Chrome os 和 Ubuntu了。
+
+<!--more-->
 
 xiwi 窗口化
 --------

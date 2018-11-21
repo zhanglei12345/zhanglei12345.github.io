@@ -17,8 +17,6 @@ tags:
 6. 外壳+风扇
 7. 32G存储的SD卡，用做硬盘(外需读卡器进行刚开始的格式化)
 
-<!--more-->
-
 ## 安装系统
 
 [官方安装文档](https://www.raspberrypi.org/documentation/installation/noobs.md)
@@ -33,10 +31,11 @@ tags:
 
 在安装界面选择安装 Raspbian。
 
+<!--more-->
+
 ## SSH 登录
 
-系统安装好后，查看它的局域网IP地址：
-`$ sudo ifconfig`
+系统安装好后，查看它的局域网IP地址：`$ sudo ifconfig`
 
 更改系统设置，SSH 登录系统默认是禁止的：
 Preferences -> Raspberry Pi Configuration -> Interfaces -> SSH Enabled
@@ -53,22 +52,26 @@ ssh 登录：`ssh pi@ip地址`
 
 若使用 ssh 登录，则需要使用以下命令编辑 wifi 配置文件：
 `sudo nano /etc/wpa_supplicant/wpa_supplicant.conf`
+
 在文件末添加：
-```
+
+```conf
 network={
    ssid="wifiname"
    psk="password"
 }
 ```
 
-重启：
-`sudo reboot`
+重启：`sudo reboot`
 
 ## 软件安装
 
 更改软件源：
+
 `sudo nano /etc/apt/sources.list`
+
 将默认的注释掉，添加：
+
 `deb http://mirrors.ustc.edu.cn/raspbian/raspbian/ jessie main contrib non-free rpi`
 
 > 或者使用以下地址代替上面的地址：
@@ -78,12 +81,16 @@ network={
 更改后，Ctrl+O回车保存，Ctrl+X退出nano编辑器。
 
 更新源：
+
 `sudo apt-get update`
 
 更新已安装的包(先不执行)：
+
 `sudo apt-get upgrade`
 
 安装 vim：
+
 `sudo apt-get install vim`
+
 
 ![](https://ws1.sinaimg.cn/large/006tKfTcly1fjlrdmbafsj31kw1nv4qp.jpg)

@@ -17,8 +17,7 @@ tags:
 
 ![](https://ws3.sinaimg.cn/large/006tKfTcly1fjlt2uriifj30dx06rmxi.jpg)
 
-当我们使用 GPIO 引脚作为输出时，Raspberry Pi 将替换上图中的开关和电池。每个引脚可以打开或关闭，或者在计算方面变为
- HIGH 或 LOW。当引脚为高电平时，它输出 3.3 伏（3v3）; 当引脚为低电平时，它是关闭的。。
+当我们使用 GPIO 引脚作为输出时，Raspberry Pi 将替换上图中的开关和电池。每个引脚可以打开或关闭，或者在计算方面变为 HIGH 或 LOW。当引脚为高电平时，它输出 3.3 伏（3v3）; 当引脚为低电平时，它是关闭的。
 
 <!--more-->
 
@@ -32,7 +31,6 @@ LED正极(长脚)接树莓派的 GPIO 引脚，负极接电阻再接 -。
 
 ## 控制程序(Python)
 
-可通过 [raspberry-gpio-python](#jump) 查看接口介绍。
 ```python
 import RPi.GPIO as GPIO
 import time
@@ -69,41 +67,47 @@ if __name__ == '__main__':
     GPIO.cleanup()
 ```
 
-
-## <a name="jump">raspberry-gpio-python</a>
+### RPi.GPIO Installation
 
 [官网](https://pypi.python.org/pypi/RPi.GPIO)
 
-### RPi.GPIO Installation
-
 The RPi.GPIO module is installed by default in Raspbian. To make sure that it is at the latest version:
+
 ```bash
 $ sudo apt-get update
 $ sudo apt-get install python-rpi.gpio python3-rpi.gpio
 ```
 
 It is recommended that you install RPi.GPIO using the pip utility as superuser (root):
+
 `sudo pip install RPi.GPIO`
 
 ### 使用
 
 导入:
+
 `import RPi.GPIO as GPIO`
 
 编写 IO 引脚的方式
+
 设置:
+
 `GPIO.setmode(GPIO.BOARD)` 或 `GPIO.setmode(GPIO.BCM)`
 > BCM 方式是按照 GPIO 引脚编号，BOARD 方式是按照物理编号
 
 获取:
+
 `mode = GPIO.getmode()`
 > The mode will be GPIO.BOARD, GPIO.BCM or None
 
 警告:
+
 GPIO 可能有多个脚本/电路，如果 RPi.GPIO 检测到引脚已配置为默认值（输入）以外的其他值，则在尝试配置脚本时会发出警告。要禁用这些警告：
+
 `GPIO.setwarnings(False)`
 
 设置一个 channel：
+
 ```python
 # input
 GPIO.setup(channel, GPIO.IN)
@@ -117,10 +121,12 @@ GPIO.setup(chan_list, GPIO.OUT)
 ```
 
 读取引脚的值：
+
 `GPIO.input(channel)`
 > This will return either 0 / GPIO.LOW / False or 1 / GPIO.HIGH / True.
 
 设置引脚输出的的状态：
+
 ```python
 GPIO.output(channel, state)
 #release 0.5.8 onwards
@@ -131,4 +137,5 @@ GPIO.output(chan_list, (GPIO.HIGH, GPIO.LOW))
 > State can be 0 / GPIO.LOW / False or 1 / GPIO.HIGH / True.
 
 在脚本结束的时候做清理：
+
 `GPIO.cleanup()`
