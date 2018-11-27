@@ -122,4 +122,4 @@ npm install hexo-deployer-git --save
 
 配置好自己的 git 后，进入 zhanglei12345.github.io 目录，执行 `npm install`，这里需要注意，千万不要用 `hexo init` 命令,因为当前目录已经建立了 git 仓库环境, `hexo init` 会覆盖到当前的 git 环境，重建一个新的，这样和源码仓库就脱离了联系。
 
-之后就能正常编写和部署了。
+之后就能正常编写和部署了,记得每次操作之前 `git pull`。
