@@ -100,3 +100,26 @@ deploy:
 
 ### 在另外一台设备上管理博客
 
+在家和公司有时都会更新博客，这时候就需要在两台设备均可管理博客了。在家可能自己会用 chromebook 上安装的 Ubuntu 进行管理，如何安装可以看我的另一篇博客 [入手折腾 Samsung Chromebook Pro](https://haoleio.com/2018/08/19/%E5%85%A5%E6%89%8B%E6%8A%98%E8%85%BESamsungChromebookPro/) 。
+
+参照 [Hexo 官网](https://hexo.io/zh-cn/docs/) 在 Ubuntu 上进行安装 Hexo。
+
+```bash
+# 安装 git
+sudo apt update
+sudo apt install git
+
+# 利用 nvm 来安装 Node.js 
+wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+nvm install node
+
+# 安装 Hexo
+npm install -g hexo-cli
+
+# 安装 git 部署
+npm install hexo-deployer-git --save
+```
+
+配置好自己的 git 后，进入 zhanglei12345.github.io 目录，执行 `npm install`，这里需要注意，千万不要用 `hexo init` 命令,因为当前目录已经建立了 git 仓库环境, `hexo init` 会覆盖到当前的 git 环境，重建一个新的，这样和源码仓库就脱离了联系。
+
+之后就能正常编写和部署了。
