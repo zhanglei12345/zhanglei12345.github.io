@@ -129,7 +129,7 @@ passwd
 
 5. docker run：
 
-    `sudo docker run -d -p 12137:12137 ssdocker:v1 -s 0.0.0.0 -p 12137 -k mypassword -m aes-256-cfb`
+    `sudo docker run --restart=always -d -p 12137:12137 ssdocker:v1 -s 0.0.0.0 -p 12137 -k mypassword -m aes-256-cfb`
 
 6. 查看 ss 容器是否启动成功：
 
@@ -231,7 +231,7 @@ passwd
 
 7. docker run：
 
-    `sudo docker run -d -p 12138:12138 ssrdocker:v1 -p 12138 -k mypassword -m aes-256-cfb -O auth_sha1_v4 -o http_simple`
+    `sudo docker run --restart=always -d -p 12138:12138 ssrdocker:v1 -p 12138 -k mypassword -m aes-256-cfb -O auth_sha1_v4 -o http_simple`
 
 8. 查看 ss 容器是否启动成功：
 
