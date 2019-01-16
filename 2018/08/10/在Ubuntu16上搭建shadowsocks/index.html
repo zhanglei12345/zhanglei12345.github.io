@@ -50,7 +50,7 @@
 <p> <code>sudo docker image ls -a</code></p>
 </li>
 <li><p>docker run：</p>
-<p> <code>sudo docker run -d -p 12137:12137 ssdocker:v1 -s 0.0.0.0 -p 12137 -k mypassword -m aes-256-cfb</code></p>
+<p> <code>sudo docker run --restart=always -d -p 12137:12137 ssdocker:v1 -s 0.0.0.0 -p 12137 -k mypassword -m aes-256-cfb</code></p>
 </li>
 <li><p>查看 ss 容器是否启动成功：</p>
 <p> <code>sudo docker container ls -a</code></p>
@@ -94,7 +94,7 @@
 <p> <code>sudo docker image ls -a</code></p>
 </li>
 <li><p>docker run：</p>
-<p> <code>sudo docker run -d -p 12138:12138 ssrdocker:v1 -p 12138 -k mypassword -m aes-256-cfb -O auth_sha1_v4 -o http_simple</code></p>
+<p> <code>sudo docker run --restart=always -d -p 12138:12138 ssrdocker:v1 -p 12138 -k mypassword -m aes-256-cfb -O auth_sha1_v4 -o http_simple</code></p>
 </li>
 <li><p>查看 ss 容器是否启动成功：</p>
 <p> <code>sudo docker container ls -a</code></p>
@@ -121,4 +121,4 @@ var disqus_url = 'http://yoursite.com/2018/08/10/在Ubuntu16上搭建shadowsocks
     var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
     dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();</script><script id="dsq-count-scr" src="//https-zhanglei12345-github-io.disqus.com/count.js" async></script><div class="copyright"><p>© 2015 - 2018 <a href="http://yoursite.com">Zhang Lei</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>
+})();</script><script id="dsq-count-scr" src="//https-zhanglei12345-github-io.disqus.com/count.js" async></script><div class="copyright"><p>© 2015 - 2019 <a href="http://yoursite.com">Zhang Lei</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>
