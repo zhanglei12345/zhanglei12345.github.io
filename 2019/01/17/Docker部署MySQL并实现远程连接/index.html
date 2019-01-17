@@ -1,0 +1,26 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Docker 部署 MySQL 并实现远程连接 · Lei's blog</title><meta name="description" content="Docker 部署 MySQL 并实现远程连接 - Zhang Lei"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="Lei's blog"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/leizhang233" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/zhanglei12345" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Docker 部署 MySQL 并实现远程连接</h1><div class="post-info">Jan 17, 2019</div><div class="post-content"><h3 id="Docker-部署-MySQL"><a href="#Docker-部署-MySQL" class="headerlink" title="Docker 部署 MySQL"></a>Docker 部署 MySQL</h3><p>下载官方镜像：<br><code>docker pull mysql</code></p>
+<p>列出镜像：<br><code>docker image ls</code></p>
+<p>创建主机存储目录：<br><code>cd &amp;&amp; mkdir mysql-data mysql-conf &amp;&amp; cd mysql-conf</code></p>
+<p>建立 mysql 配置文件，暂时将配置设置为跟容器构建时的配置一致，<code>vi config-file.cnf</code>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">skip-host-cache</span><br><span class="line">skip-name-resolve</span><br></pre></td></tr></table></figure></p>
+<p>启动容器：<br><code>docker run --name mysql --restart=always -v /home/user/mysql-conf:/etc/mysql/conf.d -v /home/user/mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d -P mysql:latest</code></p>
+<p>进入 mysql 容器：<br><code>docker exec -it mysql bash</code></p>
+<p>连接 mysql 数据库：<br><code>mysql -uroot -p</code></p>
+<p>新建 mysql 用户：<br><code>create user &#39;mysql-user&#39;@&#39;%&#39; identified by &#39;mysql-pwd&#39;;</code></p>
+<p>新建数据库：<br><code>create database testbase;</code></p>
+<p>赋用户权限：<br><code>grant all privileges on testbase.* to &#39;mysql-user&#39;@&#39;%&#39;;</code></p>
+<p>立即生效：<br><code>flush privileges;</code></p>
+<a id="more"></a>
+<h3 id="远程客户端连接"><a href="#远程客户端连接" class="headerlink" title="远程客户端连接"></a>远程客户端连接</h3><p>Sequel Pro 客户端连接时报如下错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MySQL said: Authentication plugin ‘caching_sha2_password’ cannot be loaded: dlopen(/usr/local/mysql/lib/plugin/caching_sha2_password.so, 2): image not found</span><br></pre></td></tr></table></figure></p>
+<p>原因是由于密码加密方式 caching_sha2_password 客户端不支持。</p>
+<p>修改 mysql 用户的密码加密方式：<br><code>alter user &#39;mysql-user&#39;@&#39;%&#39; identified with mysql_native_password by &#39;mysql-pwd&#39;;</code></p>
+<p>之后客户端可成功连接。</p>
+<p>参考：<br><a href="https://hub.docker.com/_/mysql?tab=description" target="_blank" rel="noopener">Docker Hub mysql</a></p>
+</div></article></div></main><footer><div class="paginator"><a href="/2019/01/16/初入Ubuntu的一些操作/" class="next">下一篇</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'https-zhanglei12345-github-io';
+var disqus_identifier = '2019/01/17/Docker部署MySQL并实现远程连接/';
+var disqus_title = 'Docker 部署 MySQL 并实现远程连接';
+var disqus_url = 'http://yoursite.com/2019/01/17/Docker部署MySQL并实现远程连接/';
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><script id="dsq-count-scr" src="//https-zhanglei12345-github-io.disqus.com/count.js" async></script><div class="copyright"><p>© 2015 - 2019 <a href="http://yoursite.com">Zhang Lei</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

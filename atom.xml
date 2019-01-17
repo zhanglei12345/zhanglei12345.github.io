@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-01-16T10:21:45.048Z</updated>
+  <updated>2019-01-17T08:36:10.645Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Docker 部署 MySQL 并实现远程连接</title>
+    <link href="http://yoursite.com/2019/01/17/Docker%E9%83%A8%E7%BD%B2MySQL%E5%B9%B6%E5%AE%9E%E7%8E%B0%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/"/>
+    <id>http://yoursite.com/2019/01/17/Docker部署MySQL并实现远程连接/</id>
+    <published>2019-01-17T08:20:05.000Z</published>
+    <updated>2019-01-17T08:36:10.645Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Docker-部署-MySQL"><a href="#Docker-部署-MySQL" class="headerlink" title="Docker 部署 MySQL"></a>Docker 部署 MySQL</h3><p>下载官方镜像：<br><code>docker pull mysql</code></p><p>列出镜像：<br><code>docker image ls</code></p><p>创建主机存储目录：<br><code>cd &amp;&amp; mkdir mysql-data mysql-conf &amp;&amp; cd mysql-conf</code></p><p>建立 mysql 配置文件，暂时将配置设置为跟容器构建时的配置一致，<code>vi config-file.cnf</code>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">skip-host-cache</span><br><span class="line">skip-name-resolve</span><br></pre></td></tr></table></figure></p><p>启动容器：<br><code>docker run --name mysql --restart=always -v /home/user/mysql-conf:/etc/mysql/conf.d -v /home/user/mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d -P mysql:latest</code></p><p>进入 mysql 容器：<br><code>docker exec -it mysql bash</code></p><p>连接 mysql 数据库：<br><code>mysql -uroot -p</code></p><p>新建 mysql 用户：<br><code>create user &#39;mysql-user&#39;@&#39;%&#39; identified by &#39;mysql-pwd&#39;;</code></p><p>新建数据库：<br><code>create database testbase;</code></p><p>赋用户权限：<br><code>grant all privileges on testbase.* to &#39;mysql-user&#39;@&#39;%&#39;;</code></p><p>立即生效：<br><code>flush privileges;</code></p><a id="more"></a><h3 id="远程客户端连接"><a href="#远程客户端连接" class="headerlink" title="远程客户端连接"></a>远程客户端连接</h3><p>Sequel Pro 客户端连接时报如下错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MySQL said: Authentication plugin ‘caching_sha2_password’ cannot be loaded: dlopen(/usr/local/mysql/lib/plugin/caching_sha2_password.so, 2): image not found</span><br></pre></td></tr></table></figure></p><p>原因是由于密码加密方式 caching_sha2_password 客户端不支持。</p><p>修改 mysql 用户的密码加密方式：<br><code>alter user &#39;mysql-user&#39;@&#39;%&#39; identified with mysql_native_password by &#39;mysql-pwd&#39;;</code></p><p>之后客户端可成功连接。</p><p>参考：<br><a href="https://hub.docker.com/_/mysql?tab=description" target="_blank" rel="noopener">Docker Hub mysql</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;Docker-部署-MySQL&quot;&gt;&lt;a href=&quot;#Docker-部署-MySQL&quot; class=&quot;headerlink&quot; title=&quot;Docker 部署 MySQL&quot;&gt;&lt;/a&gt;Docker 部署 MySQL&lt;/h3&gt;&lt;p&gt;下载官方镜像：&lt;br&gt;&lt;code&gt;docker pull mysql&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;列出镜像：&lt;br&gt;&lt;code&gt;docker image ls&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;创建主机存储目录：&lt;br&gt;&lt;code&gt;cd &amp;amp;&amp;amp; mkdir mysql-data mysql-conf &amp;amp;&amp;amp; cd mysql-conf&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;建立 mysql 配置文件，暂时将配置设置为跟容器构建时的配置一致，&lt;code&gt;vi config-file.cnf&lt;/code&gt;：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;[mysqld]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;skip-host-cache&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;skip-name-resolve&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;启动容器：&lt;br&gt;&lt;code&gt;docker run --name mysql --restart=always -v /home/user/mysql-conf:/etc/mysql/conf.d -v /home/user/mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d -P mysql:latest&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;进入 mysql 容器：&lt;br&gt;&lt;code&gt;docker exec -it mysql bash&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;连接 mysql 数据库：&lt;br&gt;&lt;code&gt;mysql -uroot -p&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;新建 mysql 用户：&lt;br&gt;&lt;code&gt;create user &amp;#39;mysql-user&amp;#39;@&amp;#39;%&amp;#39; identified by &amp;#39;mysql-pwd&amp;#39;;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;新建数据库：&lt;br&gt;&lt;code&gt;create database testbase;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;赋用户权限：&lt;br&gt;&lt;code&gt;grant all privileges on testbase.* to &amp;#39;mysql-user&amp;#39;@&amp;#39;%&amp;#39;;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;立即生效：&lt;br&gt;&lt;code&gt;flush privileges;&lt;/code&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="VPS" scheme="http://yoursite.com/categories/VPS/"/>
+    
+    
+      <category term="Docker" scheme="http://yoursite.com/tags/Docker/"/>
+    
+  </entry>
   
   <entry>
     <title>初入 Ubuntu 的一些操作</title>
