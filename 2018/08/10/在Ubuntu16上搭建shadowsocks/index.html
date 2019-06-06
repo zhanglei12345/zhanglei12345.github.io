@@ -2,7 +2,9 @@
 <h2 id="shadowsocks"><a href="#shadowsocks" class="headerlink" title="shadowsocks"></a>shadowsocks</h2><p>登录<a href="https://bandwagonhost.com/clientarea.php" target="_blank" rel="noopener">Client Area</a>,在 My Servers 里选择对应的 VPS 进入控制面板，由于刚买的 bandwagon 自带 centos，自己把系统重装为 Ubuntu 16.04 x86_64 (个人偏爱)，重装完成后会告诉你 root 密码和 ssh 端口号。</p>
 <p>远程 ssh 登录修改 root 密码：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh root@ip -p port</span><br><span class="line">passwd</span><br></pre></td></tr></table></figure>
+
 <a id="more"></a>
+
 <h3 id="搭建-ss"><a href="#搭建-ss" class="headerlink" title="搭建 ss"></a>搭建 ss</h3><ol>
 <li><p>准备：</p>
  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">apt update</span><br><span class="line">apt upgrade</span><br><span class="line">apt install python3-pip</span><br><span class="line">apt install shadowsocks</span><br></pre></td></tr></table></figure>
@@ -23,8 +25,7 @@
 <p> <code>systemctl enable shadowsocks-server</code></p>
 </li>
 </ol>
-<h3 id="开启-BBR"><a href="#开启-BBR" class="headerlink" title="开启 BBR"></a>开启 BBR</h3><pre><code>linux 内核版本要高于 4.9，才支持 BBR。
-</code></pre><ol>
+<h3 id="开启-BBR"><a href="#开启-BBR" class="headerlink" title="开启 BBR"></a>开启 BBR</h3><pre><code>linux 内核版本要高于 4.9，才支持 BBR。</code></pre><ol>
 <li><p>准备：</p>
  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">uname -a  <span class="comment"># 查看目前的内核版本</span></span><br><span class="line">dpkg --get-selections |grep linux-image  <span class="comment"># 查看安装的内核</span></span><br><span class="line">apt update  <span class="comment"># 更新源</span></span><br><span class="line">apt-cache showpkg linux-image  <span class="comment"># 查看可用的 linux 内核版本</span></span><br><span class="line">apt install linux-image-4.11.0-14-generic  <span class="comment"># 安装内核</span></span><br></pre></td></tr></table></figure>
 </li>
@@ -33,6 +34,7 @@
 </li>
 <li><p>开启 BBR：</p>
  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"net.core.default_qdisc=fq"</span> &gt;&gt; /etc/sysctl.conf</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"net.ipv4.tcp_congestion_control=bbr"</span> &gt;&gt; /etc/sysctl.conf</span><br><span class="line">sysctl -p</span><br><span class="line">lsmod | grep bbr  <span class="comment">#如果看到 tcp_bbaptr 则表示开启成功</span></span><br></pre></td></tr></table></figure>
+
 </li>
 </ol>
 <h3 id="利用-Docker-搭建-ss"><a href="#利用-Docker-搭建-ss" class="headerlink" title="利用 Docker 搭建 ss"></a>利用 Docker 搭建 ss</h3><p><a href="https://github.com/shadowsocks/shadowsocks-libev#debian--ubuntu" target="_blank" rel="noopener">参考链接</a></p>
@@ -113,7 +115,7 @@
 <li><p>通过 <code>curl http://ipinfo.io/</code> 验证命令行是否在代理模式下。</p>
 </li>
 </ol>
-</div></article></div></main><footer><div class="paginator"><a href="/2018/08/12/raspberrypi安装/" class="prev">PREV</a><a href="/2017/10/01/你好成都/" class="next">NEXT</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'https-zhanglei12345-github-io';
+</div></article></div></main><footer><div class="paginator"><a href="/2018/08/12/raspberrypi安装/" class="prev">上一篇</a><a href="/2017/10/01/你好成都/" class="next">下一篇</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'https-zhanglei12345-github-io';
 var disqus_identifier = '2018/08/10/在Ubuntu16上搭建shadowsocks/';
 var disqus_title = '在 Ubuntu 16.04上搭建 Shadowsocks';
 var disqus_url = 'http://yoursite.com/2018/08/10/在Ubuntu16上搭建shadowsocks/';
